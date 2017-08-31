@@ -1,0 +1,64 @@
+@(gamestate: GameState)
+
+@defining(play.core.PlayVersion.current) { version =>
+
+<section id="top">
+    <div class="wrapper">
+        <h1><a href="/">Home</a></h1>
+    </div>
+</section>
+
+<div id="content" class="wrapper doc">
+    <table border="1" cellpadding="15">
+        <tr>
+            <td rowspan="2">@gamestate.largerPitPlayer1</td>
+            @if(gamestate.isPlayer1Turn && !gamestate.isGameOver){
+                <td><a href="/run/5">@gamestate.roundPits(5)</a></td>
+                <td><a href="/run/4">@gamestate.roundPits(4)</a></td>
+                <td><a href="/run/3">@gamestate.roundPits(3)</a></td>
+                <td><a href="/run/2">@gamestate.roundPits(2)</a></td>
+                <td><a href="/run/1">@gamestate.roundPits(1)</a></td>
+                <td><a href="/run/0">@gamestate.roundPits(0)</a></td>
+            }else{
+                <td>@gamestate.roundPits(5)</td>
+                <td>@gamestate.roundPits(4)</td>
+                <td>@gamestate.roundPits(3)</td>
+                <td>@gamestate.roundPits(2)</td>
+                <td>@gamestate.roundPits(1)</td>
+                <td>@gamestate.roundPits(0)</td>
+            }
+            <td rowspan="2">@gamestate.largerPitPlayer2</td>
+        </tr>
+        <tr>
+            @if(!gamestate.isPlayer1Turn && !gamestate.isGameOver){
+            <td><a href="/run/6">@gamestate.roundPits(6)</a></td>
+            <td><a href="/run/7">@gamestate.roundPits(7)</a></td>
+            <td><a href="/run/8">@gamestate.roundPits(8)</a></td>
+            <td><a href="/run/9">@gamestate.roundPits(9)</a></td>
+            <td><a href="/run/10">@gamestate.roundPits(10)</a></td>
+            <td><a href="/run/11">@gamestate.roundPits(11)</a></td>
+            }else{
+            <td>@gamestate.roundPits(6)</td>
+            <td>@gamestate.roundPits(7)</td>
+            <td>@gamestate.roundPits(8)</td>
+            <td>@gamestate.roundPits(9)</td>
+            <td>@gamestate.roundPits(10)</td>
+            <td>@gamestate.roundPits(11)</td>
+            }
+        </tr>
+    </table>
+    @{
+        if(gamestate.isGameOver){
+            if(gamestate.largerPitPlayer1 > gamestate.largerPitPlayer2){
+                <p>Game over. Player 1 win</p>
+            }
+            else if(gamestate.largerPitPlayer2 > gamestate.largerPitPlayer1){
+                <p>Game over. Player 2 win</p>
+            }
+            else{
+                <p>Game over. Draw</p>
+            }
+        }
+    }
+</div>
+}
